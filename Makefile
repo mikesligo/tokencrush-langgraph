@@ -1,6 +1,6 @@
 # Makefile for tokencrush-langraph
 
-.PHONY: help venv install dev test build clean release run-example run-simple
+.PHONY: help venv install dev test build clean release run-example run-simple run-rag run-blog example-deps
 
 help: ## Show help
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | sed -E 's/:.*##/: /'
@@ -39,5 +39,17 @@ run-example: ## Run examples/simple_crush.py (requires TOKENCRUSH_API_KEY env va
 	./.venv/bin/python examples/simple_crush.py
 
 run-simple: run-example ## Alias for run-example
+
+run-rag: ## Run pure LangGraph RAG example (requires TOKENCRUSH_API_KEY, OPENAI_API_KEY)
+	@test -n "$(TOKENCRUSH_API_KEY)" || (echo "TOKENCRUSH_API_KEY env var required" && exit 1)
+	@test -n "$(OPENAI_API_KEY)" || (echo "OPENAI_API_KEY env var required" && exit 1)
+	./.venv/bin/python examples/rag_crush_langgraph.py
+
+run-blog: ## Run minimal blog example (requires TOKENCRUSH_API_KEY)
+	@test -n "$(TOKENCRUSH_API_KEY)" || (echo "TOKENCRUSH_API_KEY env var required" && exit 1)
+	./.venv/bin/python examples/blog_minimal.py
+
+example-deps: ## Install example dependencies (requests, bs4, openai)
+	./.venv/bin/pip install -U requests beautifulsoup4 openai
 
 
