@@ -1,0 +1,35 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache / compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# IDE / editor
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+
+# Env files
+.env
+.env.*
+
+
